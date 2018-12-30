@@ -1,0 +1,79 @@
+{
+  "info": {
+    "name": "api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+    "version": "v0.0.0"
+  },
+  "item": [
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "List all books",
+          "request": {
+            "url": "http://localhost:3000/books",
+            "method": "GET"
+          }
+        },
+        {
+          "name": "Create book",
+          "request": {
+            "url": "http://localhost:3000/books",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"string\",\n  \"default\": \"{\\\"title\\\":\\\"Test title\\\",\\\"author\\\":\\\"Test author\\\"}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get book by ID",
+          "request": {
+            "url": "http://localhost:3000/books/1",
+            "method": "GET"
+          }
+        },
+        {
+          "name": "Update book by ID",
+          "request": {
+            "url": "http://localhost:3000/books/1",
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"string\",\n  \"default\": \"{\\\"title\\\":\\\"Test title 2\\\",\\\"author\\\":\\\"Test author\\\"}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete book by ID",
+          "request": {
+            "url": "http://localhost:3000/books/1",
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"string\",\n  \"default\": \"{\\\"title\\\":\\\"Test title 2\\\",\\\"author\\\":\\\"Test author\\\"}\"\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

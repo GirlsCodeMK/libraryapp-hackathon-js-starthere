@@ -3,11 +3,8 @@ import http from 'http';
 import cors from 'cors';
 // Logging tool, see below.
 import morgan from 'morgan';
-// Express is our framework for handling web requests.
-// Patch Express to handle async errors. TODO: NOT WORKING.
-require('express-async-errors');
-
-const express = require('express');
+// Express is our main web framework.
+import express from 'express';
 // body-parser lets us send a JSON request body when using our API.
 import bodyParser from 'body-parser';
 

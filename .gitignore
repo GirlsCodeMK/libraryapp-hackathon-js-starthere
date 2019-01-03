@@ -1,2 +1,4 @@
 # Ignore installed node_modules
 /node_modules
+# Ignore Babel build
+/build

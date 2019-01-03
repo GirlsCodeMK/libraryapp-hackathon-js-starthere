@@ -4,6 +4,11 @@
 2. NPM (comes installed with NodeJS)
 3. PostgreSQL
 
+If you want to deploy you'll also need:
+
+1. A Heroku account
+2. The Heroku CLI
+
 # Install
 
 1. Install dependencies with `npm install`
@@ -24,6 +29,33 @@ As well as some comments in the code, you can also open the [Paw][paw] or
 [paw]: https://paw.cloud/
 [postman]: https://www.getpostman.com/
 
+# Deployment
+
+1. Create Heroku app
+
+   ```
+   $ heroku apps:create
+   ```
+
+2. Add a PostgreSQL database
+
+   ```
+   $ heroku addons:add heroku-postgresql
+   ```
+
+3. Do a deploy
+
+   ```
+   $ git push heroku master
+   ```
+
+4. Run the migrations (you'll need to do this if you add any more
+   migrations too)
+
+   ```
+   $ heroku run npx sequelize db:migrate
+   ```
+
 # TODO
 
 - [x] Initial set up, communicating with PostgreSQL database.
@@ -35,6 +67,6 @@ As well as some comments in the code, you can also open the [Paw][paw] or
 - [ ] Update user
 - [ ] Delete user
 - [ ] CRUD loans
-- [ ] Deployment
+- [x] Deployment
 - [ ] Commented throughout
 - [ ] Tests

@@ -1,0 +1,12 @@
+{
+  "name": "GirlsCode MK Library app JS",
+  "repository": "git@github.com:GirlsCodeMK/libraryapp-hackathon-js-starthere",
+  "addons": [
+    {
+      "plan": "heroku-postgresql"
+    }
+  ],
+  "scripts": {
+    "postdeploy": "npm run build && npx sequelize db:migrate"
+  }
+}

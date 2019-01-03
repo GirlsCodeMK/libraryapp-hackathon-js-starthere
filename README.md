@@ -1,7 +1,7 @@
 # Requirements
 
 1. NodeJS
-2. NPM or Yarn (NPM comes with NodeJS)
+2. NPM (comes installed with NodeJS)
 3. PostgreSQL
 
 # Install
@@ -28,7 +28,12 @@ As well as some comments in the code, you can also open the [Paw][paw] or
 
 - [x] Initial set up, communicating with PostgreSQL database.
 - [x] Create/Read/Update/Delete books
-- [ ] CRUD users (potentially including an authentication framework?)
+- [x] Sign up
+- [x] Sign in (sorta)
+- [ ] Authentication framework (persisting sessions, basic auth?)
+- [ ] Sign out
+- [ ] Update user
+- [ ] Delete user
 - [ ] CRUD loans
 - [ ] Deployment
 - [ ] Commented throughout

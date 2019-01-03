@@ -1,11 +1,11 @@
 module.exports = {
   development: {
-    username: null,
+    username: 'gwcmk',
     password: null,
-    database: 'girlscode_library_app',
-    host: 'localhost',
+    database: "gwcmk-library-app",
+    host: 'db',
     dialect: 'postgres',
-    // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators 
+    // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
     operatorsAliases: false
   },
   production: {

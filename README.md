@@ -62,16 +62,16 @@ As well as some comments in the code, you can also open the [Paw][paw] or
 - [x] Create/Read/Update/Delete books
 - [x] Sign up
 - [x] Sign in (sorta)
+- [x] Deployment
 - [x] Authentication framework (persisting sessions, basic auth?)
 - [x] Sign out
-- [ ] Update user
-- [ ] Delete user
 - [x] List loans
 - [x] Create loan
-- [ ] Return book
-- [x] Deployment
+- [ ] HTML views (move current routes to `/api`) for existing functionality
 - [ ] Commented throughout
-- [ ] Tests
+- [ ] Return book
+- [ ] Update user
+- [ ] Delete user
 - [ ] Use a [more production ready session store](https://www.npmjs.com/package/express-session#compatible-session-stores).
       This would also stop your session from clearing every time it restarts!
-
+- [ ] Tests

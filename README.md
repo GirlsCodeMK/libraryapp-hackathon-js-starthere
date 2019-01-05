@@ -63,12 +63,15 @@ As well as some comments in the code, you can also open the [Paw][paw] or
 - [x] Sign up
 - [x] Sign in (sorta)
 - [x] Authentication framework (persisting sessions, basic auth?)
-- [ ] Sign out
+- [x] Sign out
 - [ ] Update user
 - [ ] Delete user
-- [ ] CRUD loans
+- [x] List loans
+- [x] Create loan
+- [ ] Return book
 - [x] Deployment
 - [ ] Commented throughout
 - [ ] Tests
-- [ ] Use a [more production ready session store](https://www.npmjs.com/package/express-session#compatible-session-stores)
+- [ ] Use a [more production ready session store](https://www.npmjs.com/package/express-session#compatible-session-stores).
+      This would also stop your session from clearing every time it restarts!
 

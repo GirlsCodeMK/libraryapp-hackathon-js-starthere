@@ -21,6 +21,7 @@ import bcrypt from 'bcrypt';
 import {User, sequelize} from './models';
 import routes from './routes';
 
+// TODO: Set this against Express so we can re-use it.
 const env = process.env.NODE_ENV || 'development';
 
 // Set up app

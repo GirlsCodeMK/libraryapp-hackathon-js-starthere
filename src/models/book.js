@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   }, {});
-  Book.associate = function(models) {
-    // associations can be defined here
+  Book.associate = function({Loan}) {
+    Book.hasMany(Loan);
   };
   return Book;
 };

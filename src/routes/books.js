@@ -55,7 +55,7 @@ router.patch('/:id', catchAsync(async (req, res) => {
 }));
 
 // Delete book by ID. Will return 404 if book isn't found.
-router['delete']('/:id', catchAsync(async (req, res) => {
+router.delete('/:id', catchAsync(async (req, res) => {
   try {
     const book = await Book.findByPk(req.params.id);
     if (!book) {

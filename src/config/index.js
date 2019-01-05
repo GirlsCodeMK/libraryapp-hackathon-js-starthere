@@ -1,8 +1,11 @@
 module.exports = {
   development: {
-    sessionSecret: 'girlscodemk'
+    sessionSecret: 'girlscodemk',
+    // In days
+    defaultLoanDuration: 14
   },
   production: {
-    sessionSecret: process.env.SESSION_SECRET
+    sessionSecret: process.env.SESSION_SECRET,
+    defaultLoanDuration: 14
   }
 }

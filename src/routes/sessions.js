@@ -13,4 +13,9 @@ router.post('/',
   })
 );
 
+router.delete('/', (req, res) => {
+  req.logout();
+  res.status(204).send();
+});
+
 export default router;

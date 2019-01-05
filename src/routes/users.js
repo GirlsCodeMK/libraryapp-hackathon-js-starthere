@@ -15,6 +15,7 @@ router.post('/', catchAsync(async (req, res) => {
       password: req.body.password
     });
     await user.save();
+    // TODO: Also sign the user in.
     res.json(user);
   } catch(e) {
     console.warn(e);

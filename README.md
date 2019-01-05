@@ -62,7 +62,7 @@ As well as some comments in the code, you can also open the [Paw][paw] or
 - [x] Create/Read/Update/Delete books
 - [x] Sign up
 - [x] Sign in (sorta)
-- [ ] Authentication framework (persisting sessions, basic auth?)
+- [x] Authentication framework (persisting sessions, basic auth?)
 - [ ] Sign out
 - [ ] Update user
 - [ ] Delete user
@@ -70,3 +70,5 @@ As well as some comments in the code, you can also open the [Paw][paw] or
 - [x] Deployment
 - [ ] Commented throughout
 - [ ] Tests
+- [ ] Use a [more production ready session store](https://www.npmjs.com/package/express-session#compatible-session-stores)
+

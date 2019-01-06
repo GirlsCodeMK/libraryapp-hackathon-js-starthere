@@ -38,7 +38,10 @@ module.exports = (sequelize, DataTypes) => {
     // will be updated via hooks.
     password: {
       type: DataTypes.VIRTUAL,
-      // TODO: Validation
+      validate: {
+        notEmpty: true
+      },
+      // TODO: More validation
       set(val) { this.setDataValue('password', val) },
       // As above
       get() { return null; }

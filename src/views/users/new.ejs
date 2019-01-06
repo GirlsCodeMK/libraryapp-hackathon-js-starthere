@@ -1,0 +1,31 @@
+<% if (error) { %>
+  <div>
+    <p>There was an error:</p>
+
+    <p><%- error %>
+  </div>
+<% } %>
+
+<p>Sign up</p>
+
+<form action='/users' method='post'>
+
+  <p>
+    <label>
+      Email
+      <input type='email' name='email' value='<%- user && user.email %>' />
+    </label>
+  </p>
+
+  <p>
+    <label>
+      Password
+      <input type='password' name='password' />
+    </label>
+  </p>
+
+  <!-- TODO: A password confirmation field -->
+
+  <button type='submit'>Sign up!</button>
+</form>
+    

@@ -25,6 +25,7 @@ import flash from 'express-flash';
 
 import {User, sequelize} from './models';
 import routes from './routes';
+import currentUser from './lib/currentUser';
 
 // TODO: Set this against Express so we can re-use it.
 const env = process.env.NODE_ENV || 'development';
@@ -99,6 +100,10 @@ passport.deserializeUser(async (id, cb) => {
   const user = await User.findByPk(id);
   cb(null, user);
 });
+
+// Configure some middleware to make `req.user` available as `current_user`
+// in our views.
+app.use(currentUser);
 
 // Set our view engine, which is EJS. This is what we'll write our HTML
 // views in. Find out more about EJS: https://ejs.co/

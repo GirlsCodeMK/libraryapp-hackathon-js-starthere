@@ -1,0 +1,30 @@
+<p>
+  There are <%- books.length %> books available.
+</p>
+
+<% books.forEach((book) => { %>
+  <p><%- book.title %> by <%- book.author %>.</p>
+<% }) %>
+
+<hr />
+
+<p>Add a new book</p>
+
+<form action='/books' method='post'>
+
+  <p>
+    <label>
+      Title
+      <input type='text' name='title' />
+    </label>
+  </p>
+
+  <p>
+    <label>
+      Author
+      <input type='text' name='author' />
+    </label>
+  </p>
+
+  <button type='submit'>Save</button>
+</form>

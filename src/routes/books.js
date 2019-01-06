@@ -11,18 +11,19 @@ const permittedParams = ['title', 'author'];
 // View all books
 router.get('/', catchAsync(async (req, res) => {
   const books = await Book.findAll({});
-  res.json(books);
+  res.render('books/index', {books: books});
 }));
 
 // Create a book. Supply fields in the JSON request body.
 router.post('/', catchAsync(async (req, res) => {
   try {
     const book = await Book.create(req.body, {fields: permittedParams});
-    res.json(book);
+    req.flash('info', 'Book created');
   } catch(e) {
     console.warn(e);
-    res.status(400).send(e.toString());
+    req.flash('alert', e.toString());
   }
+  res.redirect('/books');
 }));
 
 // Get a single book by ID.

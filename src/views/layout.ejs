@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>GirlsCodeMK Library app</title>
+  </head>
+
+  <body>
+    <% if (messages.alert) { %>
+      <div class='alert'><%- messages.alert %></div>
+    <% } %>
+
+    <% if (messages.info) { %>
+      <div class='info'><%- messages.info %></div>
+    <% } %>
+
+    <%- body %>
+  </body>
+</html>

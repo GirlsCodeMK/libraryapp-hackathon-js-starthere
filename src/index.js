@@ -16,7 +16,12 @@ import session from 'express-session';
 import passport from 'passport';
 // passport-local lets us login using local user data (in our DB).
 import { Strategy } from 'passport-local';
+// Encrypt passwords with the Bcrypt algorithm.
 import bcrypt from 'bcrypt';
+// Use layouts so we don't have to type the same HTML over and over.
+import expressLayouts from 'express-ejs-layouts';
+// For flash messages (messages between pages)
+import flash from 'express-flash';
 
 import {User, sequelize} from './models';
 import routes from './routes';
@@ -94,6 +99,16 @@ passport.deserializeUser(async (id, cb) => {
   const user = await User.findByPk(id);
   cb(null, user);
 });
+
+// Set our view engine, which is EJS. This is what we'll write our HTML
+// views in. Find out more about EJS: https://ejs.co/
+app.set('view engine', 'ejs');
+// Keep the views folder within src
+app.set('views', 'src/views');
+// Load up express-ejs-layouts
+app.use(expressLayouts);
+// Load up express-flash. See more: https://www.npmjs.com/package/express-flash
+app.use(flash());
 
 // Load in our routes
 app.use('/', routes);

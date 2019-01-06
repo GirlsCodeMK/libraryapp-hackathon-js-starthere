@@ -5,17 +5,26 @@ import catchAsync from '../lib/catchAsync';
 
 const router = Router();
 
+// Sign in form
+router.get('/new', (req, res) => {
+  res.render('sessions/new');
+});
+
 // Create a session (sign in)
 router.post('/', 
-  passport.authenticate('local', { failureRedirect: '/login' }),
+  passport.authenticate('local', { failureRedirect: '/sessions/new' }),
   catchAsync(async (req, res) => {
-    res.send(req.user);
+    req.flash('info', 'You are now signed in');
+    res.redirect('/');
   })
 );
 
-router.delete('/', (req, res) => {
+// Normally you'd use an HTTP DELETE method here but we'd need to wire our
+// logout button to make an AJAX call to do that, TODO.
+router.post('/destroy', (req, res) => {
   req.logout();
-  res.status(204).send();
+  req.flash('info', 'You are now signed out');
+  res.redirect('/');
 });
 
 export default router;

@@ -43,13 +43,19 @@ As well as some comments in the code, you can also open the [Paw][paw] or
    $ heroku addons:add heroku-postgresql
    ```
 
-3. Do a deploy
+3. Set a `SESSION_SECRET` environment variable
+
+   ```
+   $ heroku config:set SESSION_SECRET=mysecret
+   ```
+
+4. Do a deploy
 
    ```
    $ git push heroku master
    ```
 
-4. Run the migrations (you'll need to do this if you add any more
+5. Run the migrations (you'll need to do this if you add any more
    migrations too)
 
    ```

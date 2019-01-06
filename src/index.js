@@ -44,10 +44,14 @@ app.use(cors());
 // Parse cookie headers
 app.use(cookieParser());
 
-// By default this just stores session data in memory, which isn't scalable,
-// but is fine for developing.
+// initalize sequelize with session store
+let SequelizeStore = require('connect-session-sequelize')(session.Store);
+let mySequelizeStore = new SequelizeStore({
+  db: sequelize
+});
 const sessionSecret = require('./config')[env].sessionSecret;
 app.use(session({
+  store: mySequelizeStore,
   secret: sessionSecret,
   // Don't resave if session isn't modified; not necessary for the default
   // memory store.
@@ -55,6 +59,7 @@ app.use(session({
   // Reduce storage by not saving sessions that aren't even initialized.
   saveUninitialized: false
 }));
+mySequelizeStore.sync();
 
 // support URL-encoded form data. Extended syntax lets us encode objects
 // and arrays in URL-encoded format too.

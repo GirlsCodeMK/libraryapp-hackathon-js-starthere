@@ -11,6 +11,7 @@ const env = process.env.NODE_ENV || 'development';
 
 const defaultLoanDuration = require('../config')[env].defaultLoanDuration;
 
+// TODO: These all need to be HTML-ified.
 router.get('/',
   ensureLoggedIn(),
   catchAsync(async (req, res) => {

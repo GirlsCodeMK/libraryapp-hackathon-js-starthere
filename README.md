@@ -67,7 +67,8 @@ As well as some comments in the code, you can also open the [Paw][paw] or
 - [x] Sign out
 - [x] List loans
 - [x] Create loan
-- [ ] HTML views (move current routes to `/api`) for existing functionality
+- [x] HTML views for books, sign up, sign in
+- [ ] HTML views for your loans, taking out a book
 - [ ] Commented throughout
 - [ ] Return book
 - [ ] Update user

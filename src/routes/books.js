@@ -27,6 +27,7 @@ router.post('/', catchAsync(async (req, res) => {
 }));
 
 // Get a single book by ID.
+// TODO: Should render HTML, not return JSON.
 router.get('/:id', catchAsync(async (req, res) => {
   try {
     const book = await Book.findByPk(req.params.id);
@@ -38,6 +39,8 @@ router.get('/:id', catchAsync(async (req, res) => {
 }));
 
 // Update a book by ID. Supply fields in the same way as creating a book.
+//
+// TODO: Should render HTML, not return JSON.
 //
 // Will return a 404 if no book matches the ID provided.
 router.patch('/:id', catchAsync(async (req, res) => {
@@ -56,6 +59,8 @@ router.patch('/:id', catchAsync(async (req, res) => {
 }));
 
 // Delete book by ID. Will return 404 if book isn't found.
+//
+// TODO: Should render HTML, not return JSON.
 router.delete('/:id', catchAsync(async (req, res) => {
   try {
     const book = await Book.findByPk(req.params.id);

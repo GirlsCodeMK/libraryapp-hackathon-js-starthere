@@ -12,8 +12,8 @@ If you want to deploy you'll also need:
 # Install
 
 1. Install dependencies with `npm install`
-2. Create the DB with `npx sequelize db:create`
-3. Run the migrations with `npx sequelize db:migrate`
+2. Create the DB with `npm run db:create`
+3. Run the migrations with `npm run db:migrate`
 
 # Run
 

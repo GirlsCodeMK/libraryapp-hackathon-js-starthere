@@ -4,7 +4,9 @@
   "main": "dist",
   "scripts": {
     "dev": "npx nodemon -w src --exec \"babel-node src\"",
-    "db:reset": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate",
+    "db:create": "npx sequelize db:create",
+    "db:migrate": "npx sequelize db:migrate",
+    "db:reset": "npx sequelize db:drop && npm run db:create && npm run db:migrate",
     "clean": "rm -rf build",
     "build-babel": "mkdir -p build && babel -d ./build ./src -s",
     "build": "npm run clean && npm run build-babel",
@@ -44,6 +46,7 @@
     "express-session": "^1.15.6",
     "lodash": "^4.17.11",
     "morgan": "^1.9.1",
+    "npx": "^10.2.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.7.1",

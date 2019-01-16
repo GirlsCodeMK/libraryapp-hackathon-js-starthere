@@ -74,10 +74,13 @@ As well as some comments in the code, you can also open the [Paw][paw] or
 - [x] List loans
 - [x] Create loan
 - [x] HTML views for books, sign up, sign in
-- [ ] HTML views for your loans, taking out a book
+- [x] HTML views for your loans, taking out a book
+- [x] Return book
 - [ ] Commented throughout
-- [ ] Return book
 - [ ] Update user
 - [ ] Delete user
+- [ ] Some kind of permissions system, right now anyone can create a book.
+- [ ] Check a book isn't already on loan before loaninng it out (race condition)
+- [ ] Layout; navbar etc.?
 - [x] Use a [more production ready session store](https://www.npmjs.com/package/express-session#compatible-session-stores).
 - [ ] Tests

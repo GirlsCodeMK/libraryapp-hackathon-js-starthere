@@ -11,6 +11,11 @@ const permittedParams = ['title', 'author'];
 // View all books
 router.get('/', catchAsync(async (req, res) => {
   const books = await Book.findAll({});
+
+  // For each book, calculate if it's on loan. These are async DB
+  // queries so we need to run them all before rendering the template.
+  await Promise.all(books.map(async (book) => book.onLoan = await book.getOnLoan()));
+
   res.render('books/index', {books: books});
 }));
 

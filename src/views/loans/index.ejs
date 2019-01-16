@@ -1,0 +1,14 @@
+<p>
+  You have <%- loans.length %> book(s) on loan.
+</p>
+
+<ul>
+  <% loans.forEach((loan) => { %>
+    <li>
+      <%- loan.Book.title %> by <%- loan.Book.author %>
+      <form method='post' action='/loans/<%- loan.id %>/return'>
+        <button type='submit'>Return</button>
+      </form>
+    </li>
+  <% }) %>
+</ul>

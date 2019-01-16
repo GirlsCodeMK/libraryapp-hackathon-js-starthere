@@ -11,5 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     Loan.belongsTo(User);
     // associations can be defined here
   };
+  // Return a book
+  Loan.prototype.return = async function() {
+    this.returned = true;
+    await this.save();
+  }
   return Loan;
 };

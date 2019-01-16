@@ -17,8 +17,17 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   }, {});
+
   Book.associate = function({Loan}) {
     Book.hasMany(Loan);
   };
+
+  Book.prototype.getOnLoan = async function() {
+    // A book is on loan if it has a loan associated with it
+    // that hasn't been returned yet.
+    const unreturnedLoansCount = await this.countLoans({where: {returned: false}});
+    return unreturnedLoansCount !== 0;
+  }
+
   return Book;
 };

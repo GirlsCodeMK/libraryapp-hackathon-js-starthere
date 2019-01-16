@@ -3,10 +3,19 @@
 </p>
 
 <% books.forEach((book) => { %>
-  <p><%- book.title %> by <%- book.author %>.</p>
+  <p>
+    <%- book.title %> by <%- book.author %><br />
+    <% if (book.onLoan) { %>
+      On loan
+    <% } else { %>
+      <form action='/loans' method='post'>
+        <input type='hidden' name='BookId' value='<%- book.id %>'>
+        <button type='submit'>Borrow</button>
+      </form>
+    <% } %>
+  </p>
+  <hr>
 <% }) %>
-
-<hr />
 
 <p>Add a new book</p>
 

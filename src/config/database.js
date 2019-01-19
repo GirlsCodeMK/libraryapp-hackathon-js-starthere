@@ -1,9 +1,8 @@
+require('dotenv').config();
+
 module.exports = {
   development: {
-    username: null,
-    password: null,
-    database: 'girlscode_library_app',
-    host: 'localhost',
+    use_env_variable: 'DEV_DATABASE_URL',
     dialect: 'postgres',
     // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators 
     operatorsAliases: false

@@ -9,6 +9,13 @@ router.get('/new', (req, res) => {
   res.render('users/new', {user: null, error: null});
 });
 
+// View all users
+router.get('/', catchAsync(async (req, res) => {
+  const users = await User.findAll({});
+
+  res.render('users/index', {users: users});
+}));
+
 // Create a user (sign up)
 router.post('/', catchAsync(async (req, res) => {
   // I don't use the same permittedParams trick as Books here because we'd

@@ -8,8 +8,7 @@
     "clean": "rm -rf build",
     "build-babel": "mkdir -p build && babel -d ./build ./src -s",
     "build": "npm run clean && npm run build-babel",
-    "start": "node build/index.js",
-    "postinstall": "npm run build"
+    "start": "node build/index.js"
   },
   "babel": {
     "presets": [

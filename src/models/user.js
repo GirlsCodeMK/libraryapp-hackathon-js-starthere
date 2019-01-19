@@ -1,6 +1,6 @@
 'use strict';
 
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 // Number of salt rounds for bcrypt algorithm.
 // Find out more: https://en.wikipedia.org/wiki/Bcrypt
 const SALT_ROUNDS = 10;

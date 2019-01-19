@@ -17,7 +17,7 @@ import passport from 'passport';
 // passport-local lets us login using local user data (in our DB).
 import { Strategy } from 'passport-local';
 // Encrypt passwords with the Bcrypt algorithm.
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 // Use layouts so we don't have to type the same HTML over and over.
 import expressLayouts from 'express-ejs-layouts';
 // For flash messages (messages between pages)

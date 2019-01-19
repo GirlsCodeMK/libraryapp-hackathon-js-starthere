@@ -8,8 +8,7 @@
     "clean": "rm -rf build",
     "build-babel": "mkdir -p build && babel -d ./build ./src -s",
     "build": "npm run clean && npm run build-babel",
-    "start": "node build/index.js",
-    "postinstall": "npm run build"
+    "start": "node build/index.js"
   },
   "babel": {
     "presets": [
@@ -31,12 +30,13 @@
     "@babel/core": "^7.2.2",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
-    "bcrypt": "^3.0.3",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "connect-ensure-login": "^0.1.1",
     "connect-session-sequelize": "^6.0.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-ejs-layouts": "^2.5.0",

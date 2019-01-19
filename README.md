@@ -12,8 +12,16 @@ If you want to deploy you'll also need:
 # Install
 
 1. Install dependencies with `npm install`
-2. Create the DB with `npx sequelize db:create`
-3. Run the migrations with `npx sequelize db:migrate`
+2. Create a file in the folder of the project called '.env', with content
+
+```
+DEV_DATABASE_URL=postgres://postgres@localhost:5432/girlscode_library_app
+```
+
+You may change this to 'postgres://<user>:<password>@localhost:5432/girlscode_library_app'
+
+3. Create the DB with `npx sequelize db:create`
+4. Run the migrations with `npx sequelize db:migrate`
 
 # Run
 

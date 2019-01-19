@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { Book } from '../models';
 import catchAsync from '../lib/catchAsync';
 import { pick } from 'lodash';
+import Sequelize from 'sequelize';
 
 const router = Router();
 
@@ -10,7 +11,30 @@ const permittedParams = ['title', 'author'];
 
 // View all books
 router.get('/', catchAsync(async (req, res) => {
-  const books = await Book.findAll({});
+  let books;
+  if (req.query.q) {
+    try {
+      const Op = Sequelize.Op;
+      books =
+        await Book.findAll({ where:
+          {
+            [Op.or]: [
+              {title:
+                {[Op.iLike]: '%'+req.query.q+'%'}
+              },
+              {author:
+                {[Op.iLike]: '%'+req.query.q+'%'}
+              }
+            ]
+          }
+        });
+    } catch(e) {
+      console.warn(e);
+      req.flash('alert', e.toString());
+    }
+  } else {
+    books = await Book.findAll({});
+  }
 
   // For each book, calculate if it's on loan. These are async DB
   // queries so we need to run them all before rendering the template.

@@ -1,7 +1,14 @@
-<p>Hello world.</p>
+<p>Hello Girl Coders!</p>
+<form action="/books" method="GET">
+  <label for="site-search">Search books:</label>
+  <input type="search" id="site-search" name="q"
+         aria-label="Search through site content">
 
+  <button>Search</button>
+</form>
 <ul>
   <li><a href='/books'>View available books</a></li>
+
   <% if (!currentUser) { %>
     <li><a href='/users/new'>Sign up</a></li>
     <li><a href='/sessions/new'>Sign in</a></li>

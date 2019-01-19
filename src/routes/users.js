@@ -23,6 +23,7 @@ router.post('/', catchAsync(async (req, res) => {
   // the DB. This is a bit weird on Sequelize's part.
   const user = new User({
     email: req.body.email,
+    role: "Borrower",
     password: req.body.password
   });
 

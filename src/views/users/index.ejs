@@ -1,6 +1,7 @@
 <% users.forEach((users) => { %>
   <p>
-    UserID: <%- users.id %> Email: <%- users.email %> Role: <%- users.role %> <button>Edit</button>
+    UserID: <%- users.id %> Email: <%- users.email %> Role: <%- users.role %> <a href="/users/<%- users.id %>">Edit </a>
+    </form>
   </p>
   <hr>
 <% }) %>

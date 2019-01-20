@@ -1,0 +1,17 @@
+<p>Edit User</p>
+
+<form action='/users/<%- user.id %>' method='post'>
+
+  <label>
+      Email
+      <input type='email' name='email' value='<%- user.email %>' />
+    </label>
+    
+    <select name='role'>
+      <option value='Borrower'>Borrower</option>>
+      <option value='Librarian'>Librarian</option>>
+      <option value='Admin'>Admin</option>>
+    </select>
+
+  <button type='submit'>Save</button>
+</form>

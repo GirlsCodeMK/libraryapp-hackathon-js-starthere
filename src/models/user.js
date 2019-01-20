@@ -30,16 +30,13 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     name: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.STRING
     },
     membershipDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
+      type: DataTypes.DATE
     },
     phone: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.STRING
     },
     encryptedPassword: {
       type: DataTypes.STRING,

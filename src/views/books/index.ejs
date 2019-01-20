@@ -4,7 +4,7 @@
 
 <% books.forEach((book) => { %>
   <p>
-    <a href="<%- book.id %>"><%- book.title %> by <%- book.author %></a>
+    <a href="/books/<%- book.id %>"><%- book.title %> by <%- book.author %></a>
     <br />
     <% if (book.onLoan) { %>
       On loan

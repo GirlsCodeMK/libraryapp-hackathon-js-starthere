@@ -10,13 +10,14 @@ const env = process.env.NODE_ENV || 'development';
 router.post('/',
   ensureLoggedIn(),
   catchAsync(async (req, res) => {
-    const {BookId, Text, Ratings} = req.body;
+    const {BookId, Text, Rating} = req.body;
 
-    const review = await req.user.createReview({BookId, Text, Ratings});
+    const review = await req.user.createReview({BookId, Text, Rating});
 
 
     // const loan = await req.user.createLoan({BookId, dueDate});
-    
-    // res.redirect('/loans');
+
+    res.redirect('/books/'+BookId);
   })
 );
+export default router;

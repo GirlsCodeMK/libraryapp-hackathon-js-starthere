@@ -4,6 +4,7 @@ import books from './books';
 import users from './users';
 import sessions from './sessions';
 import loans from './loans';
+import review from './review';
 
 import { Book, User } from '../models';
 import catchAsync from '../lib/catchAsync';
@@ -14,6 +15,7 @@ router.use('/books', books);
 router.use('/users', users);
 router.use('/sessions', sessions);
 router.use('/loans', loans);
+router.use('/review', review);
 
 router.get('/login', (req, res) => res.redirect('/sessions/new'));
 

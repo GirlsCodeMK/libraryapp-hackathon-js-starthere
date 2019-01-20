@@ -1,7 +1,13 @@
 <p><%- book.title %></p>
 <p><%- book.author %></p>
+<p>average rating: <%- rating %></p>
+
+<% reviews.forEach((review) => { %>
+  <p>Stars: <%- review.Rating %> <%- review.Text %></p>
+  <hr/>
+<% }) %>
 <hr/>
-<form action="" method="post">
+<form action="/review" method="post">
   <input type="hidden" name="BookId" value="<%- book.id %>">
   <p>Rate this book</p>
   <label for="Rating">Stars</label>

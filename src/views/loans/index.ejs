@@ -2,13 +2,40 @@
   You have <%- loans.length %> book(s) on loan.
 </p>
 
+<form action="/return" method="post">
+  <input id='fileInput' type="file" accept="image/*" capture="camera"/>
+  <input id='code' name='code' type='hidden' value='' />
+  <button type='submit'>Return</button>
+</form>
+
 <ul>
   <% loans.forEach((loan) => { %>
     <li>
       <%- loan.Book.title %> by <%- loan.Book.author %>
-      <form method='post' action='/loans/<%- loan.id %>/return'>
-        <button type='submit'>Return</button>
-      </form>
     </li>
   <% }) %>
 </ul>
+
+<script>
+
+$("#fileInput").on("change", function(e) {
+  if (e.target.files && e.target.files.length) {
+    const input = URL.createObjectURL(e.target.files[0]) 
+    const config = {
+      decoder: {
+        readers: ['ean_reader']
+      },
+      src: input
+    };
+    Quagga.decodeSingle(config, function(result) {
+      if (result.codeResult && result.codeResult.code) {
+        const code = result.codeResult.code;
+        $("#code").val(code);
+      } else {
+        alert("Barcode not found in photo, try taking another photo!");
+      }
+    });
+  }
+});
+
+</script>

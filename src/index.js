@@ -110,6 +110,9 @@ passport.deserializeUser(async (id, cb) => {
 // in our views.
 app.use(currentUser);
 
+// Any files in src/static will be found
+app.use(express.static('src/static'));
+
 // Set our view engine, which is EJS. This is what we'll write our HTML
 // views in. Find out more about EJS: https://ejs.co/
 app.set('view engine', 'ejs');

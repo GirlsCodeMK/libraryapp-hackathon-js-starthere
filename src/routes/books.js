@@ -7,7 +7,7 @@ import Sequelize from 'sequelize';
 const router = Router();
 
 // Fields people are permitted to modify using the API.
-const permittedParams = ['title', 'author'];
+const permittedParams = ['title', 'author', 'barcode'];
 
 // View all books
 router.get('/', catchAsync(async (req, res) => {

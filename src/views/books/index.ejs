@@ -5,6 +5,12 @@
 <% books.forEach((book) => { %>
   <p>
     <%- book.title %> by <%- book.author %><br />
+    Barcode: 
+      <% if (book.barcode) { %>
+        <pre><%- book.barcode %></pre>
+      <% } else { %>
+        <pre>No barcode added</pre>
+      <% } %>
     <% if (book.onLoan) { %>
       On loan
     <% } else { %>
@@ -32,6 +38,13 @@
     <label>
       Author
       <input type='text' name='author' />
+    </label>
+  </p>
+
+  <p>
+    <label>
+      Barcode
+      <input type='text' name='barcode' />
     </label>
   </p>
 

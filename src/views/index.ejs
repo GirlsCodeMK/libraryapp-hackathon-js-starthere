@@ -1,4 +1,5 @@
 <p>Hello Girl Coders!</p>
+
 <form action="/books" method="GET">
   <label for="site-search">Search books:</label>
   <input type="search" id="site-search" name="q"
@@ -8,6 +9,7 @@
 </form>
 <ul>
   <li><a href='/books'>View available books</a></li>
+  <li><a href='/loans'>Return a book</a></li>
 
   <% if (!currentUser) { %>
     <li><a href='/users/new'>Sign up</a></li>

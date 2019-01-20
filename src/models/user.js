@@ -32,23 +32,14 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notEmpty: true
-      }
     },
     membershipDate: {
       type: DataTypes.DATE,
       allowNull: false,
-      validate: {
-        notEmpty: true
-      }
     },
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notEmpty: true
-      }
     },
     encryptedPassword: {
       type: DataTypes.STRING,

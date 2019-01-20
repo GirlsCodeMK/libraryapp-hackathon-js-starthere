@@ -2,7 +2,7 @@
   You have <%- loans.length %> book(s) on loan.
 </p>
 
-<form action="/return" method="post">
+<form action="/loans/return" method="post">
   <input id='fileInput' type="file" accept="image/*" capture="camera"/>
   <input id='code' name='code' type='hidden' value='' />
   <button type='submit'>Return</button>

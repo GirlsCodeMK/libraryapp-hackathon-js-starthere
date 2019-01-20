@@ -45,6 +45,40 @@ router.post('/',
   })
 );
 
+// Returning a book by barcode. Will receive a `code` input from the 
+// submitted form.
+router.post('/return',
+  ensureLoggedIn(),
+  catchAsync(async (req, res) => {
+    const code = req.body.code;
+    // Loan must belong to the current user.
+    // Loan must be not returned yet.
+    const loan = await Loan.findOne({
+      where: {
+        UserId: req.user.id,
+        returned: false
+      },
+      include: [{
+        model: Book,
+        where: { barcode: code }
+      }]
+    });
+    if (!loan) {
+      req.flash('alert', "Loan not found");
+      return res.redirect('/loans');
+    }
+    try {
+      await loan.return();
+      req.flash('info', 'Book returned');
+    } catch(e) {
+      console.warn(e);
+      req.flash('alert', e.toString());
+    }
+    res.redirect('/loans');
+  })
+);
+
+
 // This should be a PUT, but HTML forms don't support PUT.
 // Return a book by marking the loan as returned.
 router.post('/:id/return',

@@ -11,7 +11,7 @@ import catchAsync from '../lib/catchAsync';
 const router = Router();
 
 router.use('/books', books);
-router.use('/users', users);
+router.use('/admin/users', users);
 router.use('/sessions', sessions);
 router.use('/loans', loans);
 

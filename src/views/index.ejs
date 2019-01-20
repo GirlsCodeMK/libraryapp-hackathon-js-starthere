@@ -10,10 +10,9 @@
   <li><a href='/books'>View available books</a></li>
 
   <% if (!currentUser) { %>
-    <li><a href='/users/new'>Sign up</a></li>
+    <li><a href='/admin/users/new'>Sign up</a></li>
     <li><a href='/sessions/new'>Sign in</a></li>
   <% } else { %>
-    <li><a href='/users'>List of Users</a></li>
     <li>
       <form action='/sessions/destroy' method='post'>
         <button type='submit'>Logout</button>

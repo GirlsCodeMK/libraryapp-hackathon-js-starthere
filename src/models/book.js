@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
 //  Book.associate = function({Loan}) {
     //Book.hasMany(Loan);
   Book.associate = function({Copy}) {
-    Book.has(Copy);
+    Book.hasMany(Copy);
   };
 
 //Books have nothing to do with Loans directly - copies of book do

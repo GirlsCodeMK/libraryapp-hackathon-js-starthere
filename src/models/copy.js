@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   Copy.associate = function({Book, Loan}) {
-    Copy.has(Book);
+    Copy.hasOne(Book);
     Copy.hasMany(Loan);
   };
 

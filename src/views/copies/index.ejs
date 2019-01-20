@@ -1,0 +1,39 @@
+<p>
+  There are <%- copies.length %> books available.
+</p>
+
+<% copies.forEach((copies) => { %>
+  <p>
+    <%- copy.Book.title %> by <%- book.author %><br />
+    <% if (copy.onLoan) { %>
+      On loan
+    <% } else { %>
+      <form action='/loans' method='post'>
+        <input type='hidden' name='BookId' value='<%- book.id %>'>
+        <button type='submit'>Borrow</button>
+      </form>
+    <% } %>
+  </p>
+  <hr>
+<% }) %>
+
+<p>Add a new book</p>
+
+<form action='/books' method='post'>
+
+  <p>
+    <label>
+      Title
+      <input type='text' name='title' />
+    </label>
+  </p>
+
+  <p>
+    <label>
+      Author
+      <input type='text' name='author' />
+    </label>
+  </p>
+
+  <button type='submit'>Save</button>
+</form>

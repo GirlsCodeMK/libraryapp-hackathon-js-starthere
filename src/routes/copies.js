@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { ensureLoggedIn } from 'connect-ensure-login';
 
-import { Book, Loan } from '../models';
+import { Book, Copy } from '../models';
 import catchAsync from '../lib/catchAsync';
 
 const router = Router();
@@ -15,36 +15,36 @@ const defaultLoanDuration = require('../config')[env].defaultLoanDuration;
 router.get('/',
   ensureLoggedIn(),
   catchAsync(async (req, res) => {
-    // Fetch loan & book information for the user's unreturned
-    // books.
-    const loans = await req.user.getLoans({
+    // Fetch copies information for the books.
+    const copies = await req.user.getCopies({
       where: {
         returned: false
       },
       include: [{
-        model: Book
+        model: Copy
       }]
     });
-    res.render('loans/index', {loans});
+    res.render('copies/index', {copies});
   })
 );
 
 router.post('/',
   ensureLoggedIn(),
   catchAsync(async (req, res) => {
-//    const {BookId} = req.body;
     const {CopyId} = req.body;
 
-    // Calculate due date
-    const dueDate = new Date();
+    // Insert copyAcquisitionDate
+    const copyAcquisitionDate =
+
+    // Insert copyNumber
+    const copyNumber =
+
     // TODO: Could use moment or similar here instead.
     dueDate.setTime(dueDate.getTime() + defaultLoanDuration * 86400000);
 
-//    const loan = await req.user.createLoan({BookId, dueDate});
-//    req.flash('info', "You've borrowed the book!");
-    const loan = await req.user.createLoan({CopyId, dueDate});
-    req.flash('info', "You've borrowed the book copy!");
-    res.redirect('/loans');
+    const loan = await req.user.createCopy({BookId, dueDate});
+    req.flash('info', "Copy created.");
+    res.redirect('/copies');
   })
 );
 
@@ -65,7 +65,6 @@ router.post('/:id/return',
     }
     try {
       await loan.return();
-//      req.flash('info', 'Book returned');
       req.flash('info', 'Book copy returned');
     } catch(e) {
       console.warn(e);

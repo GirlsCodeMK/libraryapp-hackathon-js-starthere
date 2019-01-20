@@ -79,7 +79,7 @@ router.patch('/:id', catchAsync(async (req, res) => {
       return res.status(404).send('Not found');
     }
     permittedParams.forEach((field) => book[field] = req.body[field]);
-    book.save();
+    await book.save();
     res.json(book);
   } catch(e) {
     console.warn(e);

@@ -3,3 +3,4 @@
 # Ignore Babel build
 /build
 .env
+Note.txt

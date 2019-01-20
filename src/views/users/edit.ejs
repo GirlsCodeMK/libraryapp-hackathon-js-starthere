@@ -1,17 +1,32 @@
 <p>Edit User</p>
 
+<% if (error) { %>
+  <p><%- error %></p>
+<% } %>
+
 <form action='/users/<%- user.id %>' method='post'>
 
   <label>
-      Email
-      <input type='email' name='email' value='<%- user.email %>' />
-    </label>
+    Email
+    <input type='email' name='email' value='<%- user.email %>' />
+  </label>
     
-    <select name='role'>
-      <option value='Borrower'>Borrower</option>>
-      <option value='Librarian'>Librarian</option>>
-      <option value='Admin'>Admin</option>>
-    </select>
+  <select name='role'>
+    <% ['Borrower', 'Librarian', 'Admin'].forEach((role) => { %>
+      <option
+        value="<%- role %>"
+        <% if (user.role === role) { %>
+          selected='selected'
+        <% } %>
+      >
+        <%- role %>
+      </option>
+    <% }) %>
+  </select>
 
   <button type='submit'>Save</button>
 </form>
+
+<p>
+  <a href='/users'>Go back to users</a>
+</p>

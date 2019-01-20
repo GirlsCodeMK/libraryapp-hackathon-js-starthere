@@ -1,9 +1,11 @@
 import { Router } from 'express';
+import { ensureLoggedIn } from 'connect-ensure-login';
+
 import { User } from '../models';
 import catchAsync from '../lib/catchAsync';
 
 const router = Router();
-// Fields people are permitted to modify using the API.
+// Fields people are permitted to modify using the edit form.
 const permittedParams = ['email', 'role'];
 
 // Sign up form
@@ -12,31 +14,37 @@ router.get('/new', (req, res) => {
 });
 
 // View user record
-router.get('/:id', catchAsync(async (req, res) => {
+router.get('/:id', ensureLoggedIn(), catchAsync(async (req, res) => {
   const user = await User.findByPk(req.params.id);
-  res.render('users/edit', {user: user, error: null});
+  if (!user) {
+    return res.status(404).send('User not found');
+  }
+  res.render('users/edit', {user, error: null});
 }));
 
 // View all users
-router.get('/', catchAsync(async (req, res) => {
+router.get('/', ensureLoggedIn(), catchAsync(async (req, res) => {
   const users = await User.findAll({});
 
-  res.render('users/index', {users: users});
+  res.render('users/index', {users});
 }));
 
 // Update a user
-router.post('/:id', catchAsync(async (req, res) => {
+router.post('/:id', ensureLoggedIn(), catchAsync(async (req, res) => {
+  const user = await User.findByPk(req.params.id);
+  if (!user) {
+    return res.status(404).send('User not found');
+  }
+
+  permittedParams.forEach((field) => user[field] = req.body[field]);
+
   try {
-    const user = await User.findByPk(req.params.id);
-    if (!user) {
-      return res.status(404).send('User not found');
-    }
-    permittedParams.forEach((field) => user[field] = req.body[field]);
-    user.save();
+    await user.save();
+    req.flash('info', 'User updated successfully');
     res.redirect('/users');
   } catch(e) {
     console.warn(e);
-    res.status(400).send(e.toString());
+    res.render('users/edit', {user, error: e.toString()});
   }
 }));
 

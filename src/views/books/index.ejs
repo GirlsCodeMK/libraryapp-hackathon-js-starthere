@@ -4,7 +4,8 @@
 
 <% books.forEach((book) => { %>
   <p>
-    <%- book.title %> by <%- book.author %><br />
+    <a href="<%- book.id %>"><%- book.title %> by <%- book.author %></a>
+    <br />
     <% if (book.onLoan) { %>
       On loan
     <% } else { %>
@@ -14,6 +15,7 @@
       </form>
     <% } %>
   </p>
+  <p><%- book.id %></p>
   <hr>
 <% }) %>
 

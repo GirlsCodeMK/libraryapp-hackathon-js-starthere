@@ -1,0 +1,19 @@
+<p><%- book.title %></p>
+<p><%- book.author %></p>
+<hr/>
+<form action="" method="post">
+  <input type="hidden" name="BookId" value="<%- book.id %>">
+  <p>Rate this book</p>
+  <label for="Rating">Stars</label>
+  <select name="Rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  <br/>
+  <label for="Text">My opinion about this book</label>
+  <br/>
+  <textarea name="Text" rows="8" cols="80"></textarea>
+  <br/>
+  <button type="submit">Submit my review</button>
+</form>

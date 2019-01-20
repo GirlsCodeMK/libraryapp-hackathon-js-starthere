@@ -58,13 +58,15 @@ router.post('/', catchAsync(async (req, res) => {
 // Get a single book by ID.
 // TODO: Should render HTML, not return JSON.
 router.get('/:id', catchAsync(async (req, res) => {
+  let book;
   try {
-    const book = await Book.findByPk(req.params.id);
-    res.json(book);
+    book = await Book.findByPk(req.params.id);
+    // res.json(book);
   } catch(e) {
     console.warn(e);
     res.status(400).send(e.toString());
   }
+  res.render('books/show', {book: book});
 }));
 
 // Update a book by ID. Supply fields in the same way as creating a book.

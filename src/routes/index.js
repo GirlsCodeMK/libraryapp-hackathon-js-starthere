@@ -15,6 +15,8 @@ router.use('/users', users);
 router.use('/sessions', sessions);
 router.use('/loans', loans);
 
+router.get('/login', (req, res) => res.redirect('/sessions/new'));
+
 router.get('/', catchAsync(async (req, res) => {
   const books_count = await Book.count();
   const users_count = await User.count();

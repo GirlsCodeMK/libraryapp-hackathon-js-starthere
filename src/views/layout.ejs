@@ -2,26 +2,29 @@
 
 <head>
   <title>GirlsCodeMK Library app</title>
+  <link rel='stylesheet' type='text/css' href='/css/styles.css'>
 </head>
 
 <body>
-  <a href="/"><img src="/img/logo.png" alt="library-app-logo">
-  </a>
+  <div class="container">
+    <a href="/"><img src="/img/logo.png" alt="library-app-logo">
+    </a>
 
 
-  <% if (messages.alert) { %>
-  <div class='alert'>
-    <%- messages.alert %>
+    <% if (messages.alert) { %>
+    <div class='alert'>
+      <%- messages.alert %>
+    </div>
+    <% } %>
+
+    <% if (messages.info) { %>
+    <div class='info'>
+      <%- messages.info %>
+    </div>
+    <% } %>
+
+    <%- body %>
   </div>
-  <% } %>
-
-  <% if (messages.info) { %>
-  <div class='info'>
-    <%- messages.info %>
-  </div>
-  <% } %>
-
-  <%- body %>
 </body>
 
 </html>

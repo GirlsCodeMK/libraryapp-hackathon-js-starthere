@@ -25,8 +25,7 @@ router.get('/', catchAsync(async (req, res) => {
 
 // adds a Page Not Found for every other route
 router.get('*', (req, res) => {
-  res.status(404);
-  res.render('notFound');
+  res.status(404).render('notFound');
 });
 
 export default router;

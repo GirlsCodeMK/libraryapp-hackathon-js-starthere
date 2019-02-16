@@ -44,6 +44,9 @@ app.use(cors());
 // Parse cookie headers
 app.use(cookieParser());
 
+// Adds public folder for serving css, js and images
+app.use(express.static('public'));
+
 // initalize sequelize with session store
 let SequelizeStore = require('connect-session-sequelize')(session.Store);
 let mySequelizeStore = new SequelizeStore({
@@ -75,26 +78,26 @@ app.use(passport.session());
 
 // Set up our passport strategy
 passport.use(new Strategy({
-    usernameField: 'email'
-  },
+  usernameField: 'email'
+},
   async (email, password, cb) => {
-  // Find user by email
-  const user = await User.findOne({where: {email}});
+    // Find user by email
+    const user = await User.findOne({where: {email}});
 
-  // Side note for those interested; there's a timing attack here where 
-  // if we don't find a user, the request is faster than if we do.
-  // See: https://sempf.net/post/timing-attacks-in-account-enumeration
-  // You could solve this by always doing some kind of bcrypt.compare, whether
-  // you find a user or not.
-  if (!user) { return cb(null, false); }
+    // Side note for those interested; there's a timing attack here where 
+    // if we don't find a user, the request is faster than if we do.
+    // See: https://sempf.net/post/timing-attacks-in-account-enumeration
+    // You could solve this by always doing some kind of bcrypt.compare, whether
+    // you find a user or not.
+    if (!user) {return cb(null, false);}
 
-  // Check password is valid.
-  // Why bcrypt.compare? https://www.npmjs.com/package/bcrypt#to-check-a-password
-  const validPassword = await bcrypt.compare(password, user.getDataValue('encryptedPassword'));
-  if (!validPassword) { cb(null, false) }
+    // Check password is valid.
+    // Why bcrypt.compare? https://www.npmjs.com/package/bcrypt#to-check-a-password
+    const validPassword = await bcrypt.compare(password, user.getDataValue('encryptedPassword'));
+    if (!validPassword) {cb(null, false)}
 
-  cb(null, user);
-}));
+    cb(null, user);
+  }));
 
 // Configure Passport authenticated session persistence.
 passport.serializeUser(function(user, cb) {

@@ -6,6 +6,8 @@ import morgan from 'morgan';
 // Express is our main web framework.
 import express from 'express';
 // body-parser parses the body of web requests (e.g. POST or PUTs)
+// body-parser creates a request.body and turns it (parses it) 
+// into a JavaScript object (so we can read responses from POST requests, for example)
 import bodyParser from 'body-parser';
 // cookie-parser automatically parses cookie headers into a usable format
 import cookieParser from 'cookie-parser';
@@ -20,10 +22,10 @@ import { Strategy } from 'passport-local';
 import bcrypt from 'bcryptjs';
 // Use layouts so we don't have to type the same HTML over and over.
 import expressLayouts from 'express-ejs-layouts';
-// For flash messages (messages between pages)
+// For flash (alert, error, success) messages (messages between pages)
 import flash from 'express-flash';
 
-import {User, sequelize} from './models';
+import { User, sequelize } from './models';
 import routes from './routes';
 import currentUser from './lib/currentUser';
 
@@ -63,7 +65,7 @@ mySequelizeStore.sync();
 
 // support URL-encoded form data. Extended syntax lets us encode objects
 // and arrays in URL-encoded format too.
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Support requests with a JSON request body.
 app.use(bodyParser.json());
@@ -75,29 +77,29 @@ app.use(passport.session());
 
 // Set up our passport strategy
 passport.use(new Strategy({
-    usernameField: 'email'
-  },
+  usernameField: 'email'
+},
   async (email, password, cb) => {
-  // Find user by email
-  const user = await User.findOne({where: {email}});
+    // Find user by email
+    const user = await User.findOne({ where: { email } });
 
-  // Side note for those interested; there's a timing attack here where 
-  // if we don't find a user, the request is faster than if we do.
-  // See: https://sempf.net/post/timing-attacks-in-account-enumeration
-  // You could solve this by always doing some kind of bcrypt.compare, whether
-  // you find a user or not.
-  if (!user) { return cb(null, false); }
+    // Side note for those interested; there's a timing attack here where 
+    // if we don't find a user, the request is faster than if we do.
+    // See: https://sempf.net/post/timing-attacks-in-account-enumeration
+    // You could solve this by always doing some kind of bcrypt.compare, whether
+    // you find a user or not.
+    if (!user) { return cb(null, false); }
 
-  // Check password is valid.
-  // Why bcrypt.compare? https://www.npmjs.com/package/bcrypt#to-check-a-password
-  const validPassword = await bcrypt.compare(password, user.getDataValue('encryptedPassword'));
-  if (!validPassword) { cb(null, false) }
+    // Check password is valid.
+    // Why bcrypt.compare? https://www.npmjs.com/package/bcrypt#to-check-a-password
+    const validPassword = await bcrypt.compare(password, user.getDataValue('encryptedPassword'));
+    if (!validPassword) { cb(null, false) }
 
-  cb(null, user);
-}));
+    cb(null, user);
+  }));
 
 // Configure Passport authenticated session persistence.
-passport.serializeUser(function(user, cb) {
+passport.serializeUser(function (user, cb) {
   cb(null, user.id);
 });
 
@@ -112,6 +114,8 @@ app.use(currentUser);
 
 // Set our view engine, which is EJS. This is what we'll write our HTML
 // views in. Find out more about EJS: https://ejs.co/
+// This means that whenever we use a render a template file from view/ folder
+// we don't have to add the .ejs after it.
 app.set('view engine', 'ejs');
 // Keep the views folder within src
 app.set('views', 'src/views');
@@ -131,7 +135,7 @@ const port = process.env.PORT || 3000;
 sequelize.authenticate().then(() => {
   console.log('[DB] Connected');
 
-  // ...then start the web server
+  // ...then start the web server and tell Express to listen for requests
   app.server.listen(port, () => {
     console.log(`[WEB] Server started on port ${port}`);
   });

@@ -1,18 +1,22 @@
+<!-- This is the wrapper component  -->
+
 <html>
-  <head>
-    <title>GirlsCodeMK Library app</title>
-  </head>
 
-  <body>
-    <a href="/">Home</a>
-    <% if (messages.alert) { %>
-      <div class='alert'><%- messages.alert %></div>
-    <% } %>
+<head>
+  <title>GirlsCodeMK Library app</title>
+</head>
 
-    <% if (messages.info) { %>
-      <div class='info'><%- messages.info %></div>
-    <% } %>
+<body>
+  <a href="/">Home</a>
+  <% if (messages.alert) { %>
+  <div class='alert'><%- messages.alert %></div>
+  <% } %>
 
-    <%- body %>
-  </body>
+  <% if (messages.info) { %>
+  <div class='info'><%- messages.info %></div>
+  <% } %>
+  <!-- The different views will be rendered in this body tag -->
+  <%- body %>
+</body>
+
 </html>

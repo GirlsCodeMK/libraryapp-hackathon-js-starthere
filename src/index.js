@@ -23,7 +23,7 @@ import expressLayouts from 'express-ejs-layouts';
 // For flash messages (messages between pages)
 import flash from 'express-flash';
 
-import { User, sequelize } from './models';
+import {User, sequelize} from './models';
 import routes from './routes';
 import currentUser from './lib/currentUser';
 
@@ -66,7 +66,7 @@ mySequelizeStore.sync();
 
 // support URL-encoded form data. Extended syntax lets us encode objects
 // and arrays in URL-encoded format too.
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Support requests with a JSON request body.
 app.use(bodyParser.json());
@@ -82,25 +82,25 @@ passport.use(new Strategy({
 },
   async (email, password, cb) => {
     // Find user by email
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({where: {email}});
 
     // Side note for those interested; there's a timing attack here where 
     // if we don't find a user, the request is faster than if we do.
     // See: https://sempf.net/post/timing-attacks-in-account-enumeration
     // You could solve this by always doing some kind of bcrypt.compare, whether
     // you find a user or not.
-    if (!user) { return cb(null, false); }
+    if (!user) {return cb(null, false);}
 
     // Check password is valid.
     // Why bcrypt.compare? https://www.npmjs.com/package/bcrypt#to-check-a-password
     const validPassword = await bcrypt.compare(password, user.getDataValue('encryptedPassword'));
-    if (!validPassword) { cb(null, false) }
+    if (!validPassword) {cb(null, false)}
 
     cb(null, user);
   }));
 
 // Configure Passport authenticated session persistence.
-passport.serializeUser(function (user, cb) {
+passport.serializeUser(function(user, cb) {
   cb(null, user.id);
 });
 

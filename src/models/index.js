@@ -4,9 +4,9 @@ import fs from 'fs';
 import path from 'path';
 import Sequelize from 'sequelize';
 
-const env = process.env.NODE_ENV || 'development';
-
 import configurations from '../config/database';
+
+const env = process.env.NODE_ENV || 'development';
 const config = configurations[env];
 
 const basename = path.basename(__filename);
@@ -22,13 +22,12 @@ if (config.use_env_variable) {
 
 // Load in all the model definitions using `sequelize.import` and assign them
 // to our db object for importing later.
-fs.
-  readdirSync(__dirname).
-  filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  }).
-  forEach(file => {
-    var model = sequelize.import(path.join(__dirname, file));
+fs.readdirSync(__dirname)
+  .filter(file => {
+    return file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js';
+  })
+  .forEach(file => {
+    const model = sequelize.import(path.join(__dirname, file));
     db[model.name] = model;
   });
 

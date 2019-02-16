@@ -11,7 +11,8 @@ router.get('/new', (req, res) => {
 });
 
 // Create a session (sign in)
-router.post('/', 
+router.post(
+  '/',
   passport.authenticate('local', { failureRedirect: '/sessions/new' }),
   catchAsync(async (req, res) => {
     req.flash('info', 'You are now signed in');

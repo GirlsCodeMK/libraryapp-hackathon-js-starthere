@@ -23,7 +23,7 @@ import expressLayouts from 'express-ejs-layouts';
 // For flash messages (messages between pages)
 import flash from 'express-flash';
 
-import {User, sequelize} from './models';
+import { User, sequelize } from './models';
 import routes from './routes';
 import currentUser from './lib/currentUser';
 
@@ -31,7 +31,7 @@ import currentUser from './lib/currentUser';
 const env = process.env.NODE_ENV || 'development';
 
 // Set up app
-let app = express();
+const app = express();
 app.server = http.createServer(app);
 
 // Show messages on the terminal
@@ -45,25 +45,29 @@ app.use(cors());
 app.use(cookieParser());
 
 // initalize sequelize with session store
-let SequelizeStore = require('connect-session-sequelize')(session.Store);
-let mySequelizeStore = new SequelizeStore({
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const mySequelizeStore = new SequelizeStore({
   db: sequelize
 });
 const sessionSecret = require('./config')[env].sessionSecret;
-app.use(session({
-  store: mySequelizeStore,
-  secret: sessionSecret,
-  // Don't resave if session isn't modified; not necessary for the default
-  // memory store.
-  resave: false,
-  // Reduce storage by not saving sessions that aren't even initialized.
-  saveUninitialized: false
-}));
+
+app.use(
+  session({
+    store: mySequelizeStore,
+    secret: sessionSecret,
+    // Don't resave if session isn't modified; not necessary for the default
+    // memory store.
+    resave: false,
+    // Reduce storage by not saving sessions that aren't even initialized.
+    saveUninitialized: false
+  })
+);
 mySequelizeStore.sync();
 
 // support URL-encoded form data. Extended syntax lets us encode objects
 // and arrays in URL-encoded format too.
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Support requests with a JSON request body.
 app.use(bodyParser.json());
@@ -74,27 +78,35 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Set up our passport strategy
-passport.use(new Strategy({
-    usernameField: 'email'
-  },
-  async (email, password, cb) => {
-  // Find user by email
-  const user = await User.findOne({where: {email}});
+passport.use(
+  new Strategy(
+    {
+      usernameField: 'email'
+    },
+    async (email, password, cb) => {
+      // Find user by email
+      const user = await User.findOne({ where: { email } });
 
-  // Side note for those interested; there's a timing attack here where 
-  // if we don't find a user, the request is faster than if we do.
-  // See: https://sempf.net/post/timing-attacks-in-account-enumeration
-  // You could solve this by always doing some kind of bcrypt.compare, whether
-  // you find a user or not.
-  if (!user) { return cb(null, false); }
+      // Side note for those interested; there's a timing attack here where
+      // if we don't find a user, the request is faster than if we do.
+      // See: https://sempf.net/post/timing-attacks-in-account-enumeration
+      // You could solve this by always doing some kind of bcrypt.compare, whether
+      // you find a user or not.
+      if (!user) {
+        return cb(null, false);
+      }
 
-  // Check password is valid.
-  // Why bcrypt.compare? https://www.npmjs.com/package/bcrypt#to-check-a-password
-  const validPassword = await bcrypt.compare(password, user.getDataValue('encryptedPassword'));
-  if (!validPassword) { cb(null, false) }
+      // Check password is valid.
+      // Why bcrypt.compare? https://www.npmjs.com/package/bcrypt#to-check-a-password
+      const validPassword = await bcrypt.compare(password, user.getDataValue('encryptedPassword'));
+      if (!validPassword) {
+        cb(null, false);
+      }
 
-  cb(null, user);
-}));
+      cb(null, user);
+    }
+  )
+);
 
 // Configure Passport authenticated session persistence.
 passport.serializeUser(function(user, cb) {
@@ -123,25 +135,27 @@ app.use(flash());
 // Load in our routes
 app.use('/', routes);
 
-// Work out what port to listen on. Use an environment variable, or the 
+// Work out what port to listen on. Use an environment variable, or the
 // default port of 3000.
 const port = process.env.PORT || 3000;
 
 // Check we can connect to the database OK...
-sequelize.authenticate().then(() => {
-  console.log('[DB] Connected');
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('[DB] Connected');
 
-  // ...then start the web server
-  app.server.listen(port, () => {
-    console.log(`[WEB] Server started on port ${port}`);
+    // ...then start the web server
+    app.server.listen(port, () => {
+      console.log(`[WEB] Server started on port ${port}`);
+    });
+  })
+  .catch(e => {
+    console.warn('[DB] Failed to connect');
+    console.warn(e.toString());
+
+    // Quit with a non-zero exit code so nodemon knows we crashed.
+    process.exit(1);
   });
-
-}).catch((e) => {
-  console.warn('[DB] Failed to connect');
-  console.warn(e.toString());
-
-  // Quit with a non-zero exit code so nodemon knows we crashed.
-  process.exit(1);
-});
 
 export default app;

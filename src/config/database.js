@@ -4,7 +4,7 @@ module.exports = {
   development: {
     use_env_variable: 'DEV_DATABASE_URL',
     dialect: 'postgres',
-    // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators 
+    // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
     operatorsAliases: false
   },
   production: {

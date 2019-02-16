@@ -28,6 +28,54 @@ You may change this to 'postgres://username:password@localhost:5432/girlscode_li
 ```
 $ npm run dev
 ```
+Open your browser and go to: `http://localhost:3000/`
+
+# Example GitHub workflow
+
+1. Fork this repository by clicking "Fork" on the top right corner
+2. Clone your fork to your machine,
+  `git clone https://github.com/<YOUR GITHUB USERNAME>/libraryapp-hackathon-js-starthere`
+3. Follow the installation steps in this readme file to run the app
+
+## Make changes and save them to your local branch
+
+Let's say you want to add a background image to the project
+
+1. Create a local branch: `git checkout -b addBackgroundImage'
+2. Make the changes and then save
+3. Type `git status` to review what files are being changed
+4. Type `git add .` to add ALL the changed files
+5. Type `git commit -m "Adds a background image"`
+6. Type `git push` to push the changes to your remote
+
+## Remote repository setup
+
+We suggest using two remote repositories:
+- one called upstream, in our case `https://github.com/GirlsCodeMK/libraryapp-hackathon-js-starthere`
+- one called origin, which is your fork `https://github.com/<YOUR GITHUB USERNAME>/libraryapp-hackathon-js-starthere`
+
+You can check your remote(s) by running the following command in your command line / terminal:
+`git remote -v`
+
+You can add a remote by typing: `git add remote origin https://github.com/<YOUR GITHUB USERNAME>/libraryapp-hackathon-js-starthere`
+
+Following the example above, this is how you would push your loca branch `addBackgroundImage` to your origin (fork):
+`git push --set-upstream origin addBackgroundImage` 
+
+From there you can create a pull request. The pull request will compare the changes you made to the existin code. Someone will review the code and then add it to the (upstream) master.
+
+## Updating your remote
+
+The upstream remote will update with every merged commit (this can be from you, or other contributors).
+
+Using the setup suggested above, this is how you can keep your remote up-to-date:
+
+1. To fetch all the changes, type: `git fetch upstream`
+2. To incorporate those changes to your local master type: `git merge --ff-only upstream/master`
+Now your local master is up-to-date. To make sure your origin (your fork) is up-to-date too, type:
+3. `git push -f origin master`
+
+To summarize: upstream (the girlscode master) > local master (the repository on your machine) > origin (your fork)
 
 # API documentation
 

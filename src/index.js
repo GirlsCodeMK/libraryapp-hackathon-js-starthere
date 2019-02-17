@@ -46,6 +46,9 @@ app.use(cors());
 // Parse cookie headers
 app.use(cookieParser());
 
+// Adds public folder for serving css, js and images
+app.use(express.static('public'));
+
 // initalize sequelize with session store
 let SequelizeStore = require('connect-session-sequelize')(session.Store);
 let mySequelizeStore = new SequelizeStore({

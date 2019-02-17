@@ -1,3 +1,5 @@
+<!-- This is the wrapper component  -->
+
 <html>
 
 <head>
@@ -10,17 +12,14 @@
     <a href="/"><img src="/img/logo.png" alt="library-app-logo"></a>
 
     <% if (messages.alert) { %>
-    <div class='alert'>
-      <%- messages.alert %>
-    </div>
+      <div class='alert'><%- messages.alert %></div>
     <% } %>
 
     <% if (messages.info) { %>
-    <div class='info'>
-      <%- messages.info %>
-    </div>
+      <div class='info'><%- messages.info %></div>
     <% } %>
-
+    
+    <!-- The different views will be rendered in this body tag -->
     <%- body %>
   </div>
 </body>

@@ -6,7 +6,7 @@ module.exports = {
       defaultValue: 'Borrower'
     });
   },
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface, _Sequelize) => {
     return queryInterface.removeColumn('Users', 'role');
   }
 };

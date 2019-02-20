@@ -9,9 +9,9 @@ const router = Router();
 // TODO: See index.js
 const env = process.env.NODE_ENV || 'development';
 
-const defaultLoanDuration = require('../config')[env].defaultLoanDuration;
+const { defaultLoanDuration } = require('../config')[env];
 
-// TODO: These all need to be HTML-ified.
+// TODO: These all need to be turned into HTML.
 router.get(
   '/',
   ensureLoggedIn(),
@@ -43,7 +43,7 @@ router.post(
     // TODO: Could use moment or similar here instead.
     dueDate.setTime(dueDate.getTime() + defaultLoanDuration * 86400000);
 
-    const loan = await req.user.createLoan({ BookId, dueDate });
+    await req.user.createLoan({ BookId, dueDate });
     req.flash('info', "You've borrowed the book!");
     res.redirect('/loans');
   })
@@ -72,7 +72,7 @@ router.post(
       console.warn(e);
       req.flash('alert', e.toString());
     }
-    res.redirect('/loans');
+    return res.redirect('/loans');
   })
 );
 

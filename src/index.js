@@ -15,7 +15,7 @@ import session from 'express-session';
 // passport is a framework for authentication in NodeJS.
 import passport from 'passport';
 // passport-local lets us login using local user data (in our DB).
-import { Strategy } from 'passport-local';
+import { Strategy as LocalStrategy } from 'passport-local';
 // Encrypt passwords with the Bcrypt algorithm.
 import bcrypt from 'bcryptjs';
 // Use layouts so we don't have to type the same HTML over and over.
@@ -50,7 +50,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const mySequelizeStore = new SequelizeStore({
   db: sequelize
 });
-const sessionSecret = require('./config')[env].sessionSecret;
+const { sessionSecret } = require('./config')[env];
 
 app.use(
   session({
@@ -79,7 +79,7 @@ app.use(passport.session());
 
 // Set up our passport strategy
 passport.use(
-  new Strategy(
+  new LocalStrategy(
     {
       usernameField: 'email'
     },
@@ -100,10 +100,10 @@ passport.use(
       // Why bcrypt.compare? https://www.npmjs.com/package/bcrypt#to-check-a-password
       const validPassword = await bcrypt.compare(password, user.getDataValue('encryptedPassword'));
       if (!validPassword) {
-        cb(null, false);
+        return cb(null, false);
       }
 
-      cb(null, user);
+      return cb(null, user);
     }
   )
 );
@@ -147,7 +147,7 @@ sequelize
 
     // ...then start the web server
     app.server.listen(port, () => {
-      console.log(`[WEB] Server started on port ${port}`);
+      console.log(`[WEB] Server started on port ${port} `);
     });
   })
   .catch(e => {

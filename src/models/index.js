@@ -14,10 +14,11 @@ const db = {};
 
 // If the configuration states to use an environment variable for configuration
 // (e.g. when it is deployed on Heroku), then use that instead.
+let sequelize = null;
 if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  var sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
 // Load in all the model definitions using `sequelize.import` and assign them
@@ -39,7 +40,7 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-// Export 's'equelize and 'S'equelize too, for easy use.
+// Export sequelize and Sequelize too, for easy use.
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

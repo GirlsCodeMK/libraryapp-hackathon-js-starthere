@@ -1,0 +1,14 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+	font-size: 16px;
+}
+
+.container {
+  width: 400px;
+  /* Once the container has width we can easily center
+  using this margin trick  */
+  margin: 100px auto;
+  padding: 40px;
+	box-shadow: 0 0 3px rgba(0,0,0,0.1);
+  background-color: #f7f7f7;
+}

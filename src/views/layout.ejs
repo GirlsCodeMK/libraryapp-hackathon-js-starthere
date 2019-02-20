@@ -1,10 +1,16 @@
-<html>
-  <head>
-    <title>GirlsCodeMK Library app</title>
-  </head>
+<!-- This is the wrapper component  -->
 
-  <body>
-    <a href="/">Home</a>
+<html>
+
+<head>
+  <title>GirlsCodeMK Library app</title>
+  <link rel='stylesheet' type='text/css' href='/css/styles.css'>
+</head>
+
+<body>
+  <div class="container">
+    <a href="/"><img src="/img/logo.png" alt="library-app-logo"></a>
+
     <% if (messages.alert) { %>
       <div class='alert'><%- messages.alert %></div>
     <% } %>
@@ -12,7 +18,10 @@
     <% if (messages.info) { %>
       <div class='info'><%- messages.info %></div>
     <% } %>
-
+    
+    <!-- The different views will be rendered in this body tag -->
     <%- body %>
-  </body>
+  </div>
+</body>
+
 </html>

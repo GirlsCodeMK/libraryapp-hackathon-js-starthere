@@ -6,6 +6,8 @@ import morgan from 'morgan';
 // Express is our main web framework.
 import express from 'express';
 // body-parser parses the body of web requests (e.g. POST or PUTs)
+// body-parser creates a request.body and turns it (parses it) 
+// into a JavaScript object (so we can read responses from POST requests, for example)
 import bodyParser from 'body-parser';
 // cookie-parser automatically parses cookie headers into a usable format
 import cookieParser from 'cookie-parser';
@@ -20,7 +22,7 @@ import { Strategy as LocalStrategy } from 'passport-local';
 import bcrypt from 'bcryptjs';
 // Use layouts so we don't have to type the same HTML over and over.
 import expressLayouts from 'express-ejs-layouts';
-// For flash messages (messages between pages)
+// For flash (alert, error, success) messages (messages between pages)
 import flash from 'express-flash';
 
 import { User, sequelize } from './models';
@@ -43,6 +45,9 @@ app.use(cors());
 
 // Parse cookie headers
 app.use(cookieParser());
+
+// Adds public folder for serving css, js and images
+app.use(express.static('public'));
 
 // initalize sequelize with session store
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -109,7 +114,7 @@ passport.use(
 );
 
 // Configure Passport authenticated session persistence.
-passport.serializeUser(function(user, cb) {
+passport.serializeUser(function (user, cb) {
   cb(null, user.id);
 });
 
@@ -124,6 +129,8 @@ app.use(currentUser);
 
 // Set our view engine, which is EJS. This is what we'll write our HTML
 // views in. Find out more about EJS: https://ejs.co/
+// This means that whenever we use a render a template file from view/ folder
+// we don't have to add the .ejs after it.
 app.set('view engine', 'ejs');
 // Keep the views folder within src
 app.set('views', 'src/views');

@@ -73,8 +73,10 @@ module.exports = (sequelize, DataTypes) => {
       beforeValidate: hashPassword
     }
   });
-  User.associate = function({Loan}) {
+  User.associate = function({Loan, Review}) {
     User.hasMany(Loan);
+    User.hasMany(Review);
   };
+  
   return User;
 };

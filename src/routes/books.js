@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { Book } from '../models';
+import { Book, Review } from '../models';
 import catchAsync from '../lib/catchAsync';
 import { pick } from 'lodash';
 import Sequelize from 'sequelize';
 
 const router = Router();
-
+const Op = Sequelize.Op;
 // Fields people are permitted to modify using the API.
 const permittedParams = ['title', 'author'];
 
@@ -14,7 +14,6 @@ router.get('/', catchAsync(async (req, res) => {
   let books;
   if (req.query.q) {
     try {
-      const Op = Sequelize.Op;
       books =
         await Book.findAll({ where:
           {
@@ -58,13 +57,21 @@ router.post('/', catchAsync(async (req, res) => {
 // Get a single book by ID.
 // TODO: Should render HTML, not return JSON.
 router.get('/:id', catchAsync(async (req, res) => {
+  let book;
+  let reviews;
+  let rating = 0;
   try {
-    const book = await Book.findByPk(req.params.id);
-    res.json(book);
+    book = await Book.findByPk(req.params.id);
+    reviews = await Review.findAll({where: {BookId: {[Op.eq]: book.id}}});
+    if(reviews.length > 0) {
+      rating = reviews.reduce((a, review) => a + review.Rating,0) / reviews.length;
+    }
+    // res.json(book);
   } catch(e) {
     console.warn(e);
     res.status(400).send(e.toString());
   }
+  res.render('books/show', {book: book, reviews: reviews, rating: rating});
 }));
 
 // Update a book by ID. Supply fields in the same way as creating a book.

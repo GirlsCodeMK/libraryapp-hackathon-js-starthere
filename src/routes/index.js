@@ -17,11 +17,14 @@ router.use('/loans', loans);
 
 router.get('/login', (req, res) => res.redirect('/sessions/new'));
 
-router.get('/', catchAsync(async (req, res) => {
-  const books_count = await Book.count();
-  const users_count = await User.count();
-  res.render('index', { books_count, users_count });
-}));
+router.get(
+  '/',
+  catchAsync(async (req, res) => {
+    const books_count = await Book.count();
+    const users_count = await User.count();
+    res.render('index', { books_count, users_count });
+  })
+);
 
 // adds a Page Not Found for every other route
 router.get('*', (req, res) => {

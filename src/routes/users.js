@@ -25,8 +25,11 @@ router.get('/:id', ensureLoggedIn(), catchAsync(async (req, res) => {
 // View all users
 router.get('/', ensureLoggedIn(), catchAsync(async (req, res) => {
   const users = await User.findAll({});
-
-  res.render('users/index', {users});
+  if(req.user.role == 'Borrower') {
+	  res.redirect('/');
+  } else {
+  	res.render('users/index', {users});
+  }
 }));
 
 // Update a user
@@ -41,7 +44,7 @@ router.post('/:id', ensureLoggedIn(), catchAsync(async (req, res) => {
   try {
     await user.save();
     req.flash('info', 'User updated successfully');
-    res.redirect('/users');
+    res.redirect('/admin/users');
   } catch(e) {
     console.warn(e);
     res.render('users/edit', {user, error: e.toString()});
